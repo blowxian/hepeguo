@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>file</title>
+</head>
+<body id="body">
+<div id="dropzone" style="height: 200px; width: 200px; border: 1px solid black" ondrop = "drop()"></div>
+</body>
+<script>
+var w = new Worker("FileWork.js");
+var length = 0;
+dropzone.ondrop = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var files = event.dataTransfer.files;
+    length = files.length;
+    w.postMessage(files);
+}
+dropzone.ondragover = function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
+dropzone.ondragenter = function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
+w.onmessage = function(message) {
+    if(message.data.j == length) {
+        body.innerHTML = message.data.html;
+    }
+    console.log(message.data.j);
+}
+</script>
+</html>
