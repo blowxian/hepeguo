@@ -1,0 +1,17 @@
+h1 {
+	color: red;
+}
+.text {
+	height: 400px;
+	width: 100%;
+	border: 1px solid gray;
+	margin-bottom: 10px;
+}
+.save {
+	height: 50px;
+	width: 150px;
+}
+input {
+	height: 42px;
+	width: 300px;
+}

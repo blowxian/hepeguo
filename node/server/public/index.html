@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>node test</title>
+	<link rel="stylesheet" href="css/test.css"/>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<h1>node test</h1>
+<div class="text"></div>
+
+<input class="fileName" placeholder="please input file name you want to save the data"></input>
+<button class="save" onclick="save()">Save File</button>
+</body>
+<script>
+  var socket = io.connect('http://localhost:3000');
+  socket.on('message-available', function (data) {
+    addMessage(data);
+  });
+
+  socket.on('message-added', addMessage);
+
+  function addMessage(data) {
+  	$(".text").html(data);
+  }
+
+  function save() {
+  	socket.emit("saveToFile", $(".fileName").val());
+  	console.log("save", $(".fileName").val());
+  }
+</script>
+</html>

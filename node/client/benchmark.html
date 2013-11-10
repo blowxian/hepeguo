@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>node test</title>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+<h1>node test</h1>
+<textarea style="height: 300px; width: 500px"></textarea>
+<button style="height: 50px; width: 200px" onclick="sentData()">sent</button>
+</body>
+<script type="text/javascript">
+var sentData = function(){
+	var text = $("textarea")[0].value;
+	console.log(text);
+	$.post("http://192.168.2.108:3000/benchmark", {name: text}, function(result) {
+		console.log(result);
+	}, "jsonp");
+}
+	
+</script>
+</html>
