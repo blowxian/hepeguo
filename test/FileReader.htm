@@ -4,7 +4,7 @@
 <title>file</title>
 </head>
 <body>
-<input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+<input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)"/>
 <a href="#" id="fileSelect">Select some files</a>
 <img  style="max-height: 100%; max-width: 300px"/>
 <img  style="max-height: 100%; max-width: 300px"/>
@@ -17,7 +17,7 @@ fileSelect.addEventListener("click", function (e) {
   if (fileElem) {
     fileElem.click();
   }
-  e.preventDefault(); // prevent navigation to "#"
+  e.preventDefault();
 }, false);
 
 
@@ -43,7 +43,15 @@ imgFile.onload = function(event) {
     document.getElementsByTagName("img")[j].src = data;
     j++;
 };
-
+imgFile.onprogress = function(event) {
+  console.log(event.loaded / event.total);
+}
+imgFile.onloadend = function() {
+  console.log("end");
+}
+imgFile.onloadstart = function() {
+  console.log("start");
+}
 console.log(imgFile);
 </script>
 </html>
