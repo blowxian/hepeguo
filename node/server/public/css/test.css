@@ -1,0 +1,24 @@
+h1, h2 {
+	color: gray;
+}
+.text {
+	height: 400px;
+	width: 100%;
+	margin-bottom: 10px;
+}
+.FPS, .flip {
+	float: left;
+	width: 48%;
+	height: 100%;
+	border: 1px solid gray;	
+	overflow-y: auto;
+}
+.save {
+	height: 50px;
+	width: 150px;
+}
+input {
+	height: 42px;
+	width: 500px;
+	font-size: medium;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>file</title>
+</head>
+<body>
+<input type="file" id="fileElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)"/>
+<a href="#" id="fileSelect">Select some files</a>
+<img  style="max-height: 100%; max-width: 300px"/>
+<img  style="max-height: 100%; max-width: 300px"/>
+</body>
+<script>
+var fileSelect = document.getElementById("fileSelect"),
+  fileElem = document.getElementById("fileElem");
+
+fileSelect.addEventListener("click", function (e) {
+  if (fileElem) {
+    fileElem.click();
+  }
+  e.preventDefault();
+}, false);
+
+
+var file = document.getElementsByTagName("input")[0];
+console.log(file.files);
+var imgFile = new FileReader();
+file.onchange = function() {
+    for(var i = 0; i < file.files.length; i++) {
+        var ifile = file.files[i]
+        imgFile.readAsDataURL(ifile);
+    }
+    if(file.files.length === 0) {
+        console.log("no img file input");
+    }
+}
+
+var img1 = document.getElementsByTagName("img")[0];
+var img2 = document.getElementsByTagName("img")[1];
+var j = 0;
+imgFile.onload = function(event) {
+    var data = event.target.result;
+    console.log(data);
+    document.getElementsByTagName("img")[j].src = data;
+    j++;
+};
+imgFile.onprogress = function(event) {
+  console.log(event.loaded / event.total);
+}
+imgFile.onloadend = function() {
+  console.log("end");
+}
+imgFile.onloadstart = function() {
+  console.log("start");
+}
+console.log(imgFile);
+</script>
+</html>

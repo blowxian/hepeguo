@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>backbone</title>
+  <script type="text/javascript" src="underscore.js"></script>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="backbone.js"></script>
+</head>
+<body>
+  <script>
+    var User = Backbone.Model.extend({
+      defaults: {
+        name: "guozy",
+        age: 25
+      },
+
+      initialize: function() {
+        console.log("initialize");
+        this.on("change", this.onchange);
+        this.on("invalid", this.oninvalid);
+      },
+
+      validate: function(attrs, options) {
+        if(attrs.age < 0) {
+          return "age must big than zero!!!";
+        }
+      },
+
+      onchange: function(msg) {
+        console.log(msg);
+      },
+      
+      oninvalid: function(msg) {
+        console.log(msg.validationError);
+      }
+    });
+
+    var UserView = Backbone.View.extend({      
+      initialize: function() {
+        this.model = new User;
+        this.render();
+      },
+
+      render: function() {
+        console.log(this.$el);
+        this.$el.html("<p>" + this.model.get("name") + "</p><br /><p>" + this.model.get("age") + "</p>");
+      }
+
+    })
+
+    var u = new User();
+    var userView = new UserView;
+    u.set({age: -4}, {validate: true});
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Benchmark Data Collector</title>
+  <link rel="stylesheet" href="css/test.css"/>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Benchmark Data Collector</h1>
+  <div class="text">
+    <div class="FPS">
+      <h2>FPS</h2>
+    </div>
+    <div class="flip">
+      <h2>flip page</h2>
+    </div>
+  </div>
+
+  <input class="fileName" placeholder="Please input the file name you want to save the data"/>
+  <button class="save" onclick="save()">Save File</button>
+</body>
+  <script>
+  var socket = io.connect('http://192.168.1.113:3000');
+  socket.on('message-available', function (data) {
+    data.averageFPS.forEach(function(item) {
+      addFPS(item);
+    });
+    data.flipPages.forEach(function(item) {
+      addFlip(item);
+    });
+  });
+
+  socket.on('message-FPS', addFPS);
+  socket.on('message-flip', addFlip);
+
+  function addFPS(data) {
+    var html = $(".FPS").html();
+    $(".FPS").html(html + "<div class='item'>FPS: " + data + "</div>");
+  }
+
+  function addFlip(data) {
+    var html = $(".flip").html();
+    $(".flip").html(html + "<div class='item'>flip page: " + data + "</div>");
+  }
+
+  function save() {
+    socket.emit("saveToFile", $(".fileName").val());
+    console.log("save", $(".fileName").val());
+  }
+</script>
+</html>
