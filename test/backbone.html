@@ -7,11 +7,16 @@
   <script type="text/javascript" src="backbone.js"></script>
 </head>
 <body>
+  <div></div>
   <script>
     var User = Backbone.Model.extend({
       defaults: {
         name: "guozy",
         age: 25
+      },
+
+      modelEvents: {
+        "change:name": "changeName"
       },
 
       initialize: function() {
@@ -35,9 +40,12 @@
       }
     });
 
-    var UserView = Backbone.View.extend({      
+    var UserView = Backbone.View.extend({ 
+
+      el: $('div'),
+           
       initialize: function() {
-        this.model = new User;
+        this.model = new User();
         this.render();
       },
 
@@ -49,8 +57,8 @@
     })
 
     var u = new User();
-    var userView = new UserView;
-    u.set({age: -4}, {validate: true});
+    var userView = new UserView();
+    //u.set({age: -4}, {validate: true});
   </script>
 </body>
 </html>
