@@ -19,6 +19,10 @@ app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/index.html");
 });
 
+app.get("/test",function(req, res) {
+	console.log(req.query.name);
+});
+
 app.get('/benchmark', function(req, res) {
 	if (req.query.averageFPS) {
 		averageFPS.push(req.query.averageFPS);
