@@ -1,3 +1,3 @@
 exports.tpl = function () {
-	return '<h1>Here is a sample template {{=it.foo}}</h1>';
+	return '{{~ it:v:i}}<h1>{{=i + 1}}{{=v.name}}</h1>{{~ v.options:vv}}<h3>{{= vv.displayName}}</h3>{{~}}{{~}}';
 };

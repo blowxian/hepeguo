@@ -9,11 +9,6 @@ default ({
 var dot = require('dot');
 var tpl = require("./tpl.js").tpl();
 
-// var foo = {
-// 	foo: "guozy"
-// };
-// var doc = dot.template(tpl)(foo);
-
 var config = {
 	ext: argv.ext,
 	path: argv.path,
@@ -133,7 +128,9 @@ function getData(ext, lan) {
 		data.push(control);
 	});
 
-	fs.writeFileSync("doc-" + lan + "." + ext, JSON.stringify(data, null, 4));
+	//fs.writeFileSync("doc-" + lan + "." + ext, JSON.stringify(data, null, 4));
+	var doc = dot.template(tpl)(data);
+	fs.writeFileSync("doc.html", doc);
 };
 
 //fs.writeFileSync("doc.json", JSON.stringify(data, null, 4));
