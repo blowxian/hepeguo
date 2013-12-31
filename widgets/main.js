@@ -4,27 +4,32 @@ var argv = require('optimist').
 default ({
 	ext: "md",
 	path: "./controls/",
-	lan: "en"
+	lan: "zh",
+	tpl: "./home.md"
 }).argv;
 var dot = require('dot');
-var tpl = require("./tpl.js").tpl();
+var toMarkDown = require("to-markdown").toMarkDown;
+//var tpl = require("./tpl.js").tpl();
 
 var config = {
-	ext: argv.ext,
+	ext: argv.ext.toLowerCase(),
+	lan: argv.lan.toLowerCase(),
 	path: argv.path,
-	lan: argv.lan
+	tpl: argv.tpl
 };
 
 var data = [],
 	lanFile;
 var controls = getFile(path.join(config.path, "controls.json"));
+var tpl = fs.readFileSync(config.tpl, "utf8");
 
-start();
-
+if(controls) {	
+	start();
+}
 
 function start() {
 	if (config.lan == "en") {
-		if (config.ext == "html" || config.ext == "MD" || config.ext == "md") {
+		if (config.ext.to == "html" || config.ext == "md") {
 			getData(config.ext, "en");
 		} else if (config.ext == "both") {
 			getData("html", "en");
@@ -34,8 +39,7 @@ function start() {
 		}
 
 	} else if (config.lan == "zh") {
-		//getData(config.ext, "zh");
-		if (config.ext == "html" || config.ext == "MD" || config.ext == "md") {
+		if (config.ext == "html" || config.ext == "md") {
 			getData(config.ext, "zh");
 		} else if (config.ext == "both") {
 			getData("html", "zh");
@@ -44,9 +48,7 @@ function start() {
 			console.log("ext must be 'md' or 'html' or 'both'!")
 		}
 	} else if (config.lan == "both") {
-		//getData(config.ext, "zh");
-		//getData(config.ext, "en");
-		if (config.ext == "html" || config.ext == "MD" || config.ext == "md") {
+		if (config.ext == "html" || config.ext == "md") {
 			getData(config.ext, "en");
 			getData(config.ext, "zh");
 		} else if (config.ext == "both") {
@@ -108,7 +110,7 @@ function getData(ext, lan) {
 		if (package.signals) signal = getFile(path.join(config.path, item, package.signals));
 		if (package.slots) slot = getFile(path.join(config.path, item, package.slots));
 		var control = {
-			name: item,
+			name: item.substring(0, 1).toUpperCase() + item.substring(1),
 			package: package,
 			options: option,
 			signals: signal,
@@ -124,14 +126,26 @@ function getData(ext, lan) {
 		i18n(control.options, "options");
 		if (control.signals) i18n(control.signals, "signals");
 		if (control.slots) i18n(control.slots, "slots");
+		control.signals = obj2array(control.signals);
+		control.slots = obj2array(control.slots);
 
 		data.push(control);
 	});
-
-	//fs.writeFileSync("doc-" + lan + "." + ext, JSON.stringify(data, null, 4));
 	var doc = dot.template(tpl)(data);
-	fs.writeFileSync("doc.html", doc);
+	fs.writeFileSync("doc-" + lan + "." + ext, doc);
 };
+
+function obj2array(obj) {
+	if(!obj || typeof obj != "object") {
+		return obj;
+	}
+	var A = [];
+	for(var key in obj) {
+		obj[key].name = key;
+		A.push(obj[key]);
+	}
+	return A;
+}
 
 //fs.writeFileSync("doc.json", JSON.stringify(data, null, 4));
 //fs.writeFileSync("doc.html", doc);
