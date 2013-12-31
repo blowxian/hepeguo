@@ -8,7 +8,8 @@ default ({
 	tpl: "./home.md"
 }).argv;
 var dot = require('dot');
-var toMarkDown = require("to-markdown").toMarkDown;
+var toMD = require('to-markdown').toMarkdown;
+
 //var tpl = require("./tpl.js").tpl();
 
 var config = {
@@ -132,6 +133,9 @@ function getData(ext, lan) {
 		data.push(control);
 	});
 	var doc = dot.template(tpl)(data);
+	if(config.ext == "md") {
+		doc = toMD(doc)
+	}
 	fs.writeFileSync("doc-" + lan + "." + ext, doc);
 };
 
