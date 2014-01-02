@@ -66,6 +66,10 @@ function start() {
 };
 
 function getFile(path) {
+	if(!fs.existsSync(path)) {
+		console.log(path + " can not find!!!");
+		return
+	}
 	var data = fs.readFileSync(path, 'utf8');
 	data = JSON.parse(data);
 	return data;
@@ -133,7 +137,7 @@ function getData(ext, lan) {
 		data.push(control);
 	});
 	var doc = dot.template(tpl)(data);
-	if(config.ext == "md") {
+	if(ext == "md") {
 		doc = toMD(doc)
 	}
 	fs.writeFileSync("doc-" + lan + "." + ext, doc);
@@ -152,4 +156,3 @@ function obj2array(obj) {
 }
 
 //fs.writeFileSync("doc.json", JSON.stringify(data, null, 4));
-//fs.writeFileSync("doc.html", doc);
