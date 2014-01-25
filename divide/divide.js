@@ -211,7 +211,7 @@ var DivideModel = function(obj) {
 
 DivideModel.prototype = {
 	setBorrow: function(boo) {
-		this.borrow =  boo;
+		this.borrow = boo;
 		return this;
 	},
 	getBorrow: function() {

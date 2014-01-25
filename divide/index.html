@@ -4,21 +4,6 @@
 <title>divide</title>
 <script type="text/javascript" src="divide.js"></script>
 <style>
-.divide {
-	height: 100%;
-	width: 100%;
-	/*background: gray;*/
-}
-.num {
-	height: 30px;
-	background: gray;
-	border-radius: 2px;
-	display: inline-block;
-	margin-bottom: 5px;
-	margin-right: 5px;
-	padding: 3px;
-	line-height: 30px;
-}
 .number {
 	height: 30px;
 	width: 30px;
@@ -32,35 +17,51 @@
 .hide {
 	visibility: hidden;
 }
+.num {
+	float: left;
+}
+#num1 {
+	padding-top: 34px;
+	padding-right: 10px;
+}
 </style>
 </head>
 <body>
 	<h1>divide</h1>
-	<div id="input"></div>
+	<div>
+		<div id="num1" class="num"></div>
+		<div id="num2" class="num"></div>
+	</div>
 </body>
 
 <script>
 var inputHTML = function(arr) {
 			var html = "";
-			for(var i = 0; i < arr.length; i++) {
+			for(var i = 1; i < arr.length; i++) {
 				for(var j = 0; j < arr[i].length; j++) {
 					if(arr[i][j].getValue() == -1) {
-						html += "<div class='number hide'>&nbsp</div>";
+						html += "<div class='number hide row" + i + "'>&nbsp</div>";
 					}
 					else {
-						html += "<div class='number'>" + arr[i][j].getValue() + "</div>";
+						html += "<div class='number row" + i + "'>" + arr[i][j].getValue() + "</div>";
 					}					
 				}
 				html += "<br />";
 			}
 
-			document.getElementById("input").innerHTML = html;
-		} 
+			document.getElementById("num2").innerHTML = html;
+		}
+var num1 = function(arr){
+	var html = "";
+	for(var i = 0; i < arr.length; i++) {
+	html += "<div class='number row0'>" + arr[i].getValue() + "</div>";
+	document.getElementById("num1").innerHTML = html;
+}
+}
+
 var answer = new Divide(19, 181900);
 answer.getAnswer();
-console.log(answer.list);
 inputHTML(answer.list);
-
-
+num1(answer.list[0])
 </script
 </html>
