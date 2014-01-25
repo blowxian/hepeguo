@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>divide</title>
+<script type="text/javascript" src="divide.js"></script>
+<style>
+.divide {
+	height: 100%;
+	width: 100%;
+	/*background: gray;*/
+}
+.num {
+	height: 30px;
+	background: gray;
+	border-radius: 2px;
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	padding: 3px;
+	line-height: 30px;
+}
+.number {
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	border: 1px solid gray;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 2px;
+	margin: 1px 1px 1px 0;
+}
+.hide {
+	visibility: hidden;
+}
+</style>
+</head>
+<body>
+	<h1>divide</h1>
+	<div id="input"></div>
+</body>
+
+<script>
+var inputHTML = function(arr) {
+			var html = "";
+			for(var i = 0; i < arr.length; i++) {
+				for(var j = 0; j < arr[i].length; j++) {
+					if(arr[i][j].getValue() == -1) {
+						html += "<div class='number hide'>&nbsp</div>";
+					}
+					else {
+						html += "<div class='number'>" + arr[i][j].getValue() + "</div>";
+					}					
+				}
+				html += "<br />";
+			}
+
+			document.getElementById("input").innerHTML = html;
+		} 
+var answer = new Divide(19, 181900);
+answer.getAnswer();
+console.log(answer.list);
+inputHTML(answer.list);
+
+
+</script
+</html>
