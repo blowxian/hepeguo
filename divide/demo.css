@@ -1,0 +1,20 @@
+.number {
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	border: 1px solid gray;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 2px;
+	margin: 1px 1px 1px 0;
+}
+.hide {
+	visibility: hidden;
+}
+.num {
+	float: left;
+}
+#num1 {
+	padding-top: 34px;
+	padding-right: 10px;
+}
