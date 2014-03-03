@@ -152,7 +152,7 @@ Divide.prototype = {
 	},
 
 	borrowAndCarry: function(arr) {
-		console.log(arr);
+		//console.log(arr);
 		var index = 3;
 		var len = arr[0].length
 
@@ -169,7 +169,7 @@ Divide.prototype = {
 		for (var i = 2; i < arr.length - 1; i += 2) {
 			for (var j = 0; j < arr[i + 1].length; j++) {
 				if ((arr[i][j].getValue() < arr[i + 1][j].getValue())) {
-					arr[i][j - 1].setBorrow(true);
+					arr[i][j].setBorrow(true);
 				}
 			}
 		}
@@ -179,7 +179,10 @@ Divide.prototype = {
 		for (var i = 0; i < arr[1].length; i++) {
 			if (arr[1][i].getValue() > 0) {
 				for (var j = len - 1; j >= 0; j--) {
-					var carry = arr[1][i].getValue() * arr[0][j].getValue() + arr[index][arr[index].length - len + j].getCarry();
+					var carry = arr[1][i].getValue() * arr[0][j].getValue();
+					if(arr[index][arr[index].length - len + j].getCarry()) {
+						carry += arr[index][arr[index].length - len + j].getCarry();
+					}
 					if (arr[1][i].getValue() && carry >= 10) {
 						arr[index][arr[index].length - len + j - 1].setCarry(Math.floor(carry / 10));
 					}
