@@ -1,0 +1,15 @@
+{
+	"name": "getDoc",
+    "version": "0.1.0",
+    "description": "get document of controls",
+    "author": "guozhenyong <hepeguo@gmail.com>",
+    "dependencies": {
+        "dot": ">=1.0.1",
+        "optimist": ">=0.6.0",
+        "to-markdown": ">= 0.0.1"
+    },
+    "main": "getDoc",
+    "scripts": {
+        "start": "node getDoc.js"
+    }
+}
