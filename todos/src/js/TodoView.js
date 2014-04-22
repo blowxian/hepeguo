@@ -55,4 +55,4 @@ define(["require", "backbone", "localStorage", "todo"], function(require) {
 
   });
   return TodoView;
-})
+});
