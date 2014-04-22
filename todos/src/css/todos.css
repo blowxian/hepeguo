@@ -5,6 +5,7 @@ body {
 }
 
 body {
+	position: relative;
 	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
 	background: #eeeeee;
@@ -113,7 +114,7 @@ body {
 
 #todo-list li.editing .edit {
 	display: block;
-	width: 444px;
+	width: 100%;
 	padding: 13px 15px 14px 20px;
 	margin: 0;
 }
@@ -132,7 +133,6 @@ body {
 
 #todoapp footer {
 	display: none;
-	margin: 0 -20px -20px -20px;
 	overflow: hidden;
 	color: #555555;
 	background: #f4fce8;
