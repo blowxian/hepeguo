@@ -207,3 +207,13 @@ body {
 #credits a {
 	color: #888;
 }
+/*
+my css
+ */
+
+footer * {
+	display: inline-block;
+}
+#clear-completed {
+	margin-right: 10px; 
+}

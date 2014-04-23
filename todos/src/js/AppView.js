@@ -1,23 +1,18 @@
-define(["require", "backbone", "localStorage", "todoList", "TodoView"], function(require) {
-  var Backbone = require("backbone");
-  require("localStorage");
+define(["require", "todoList", "TodoView", "../tpl/stats"], function(require) {
+  var Base = require("Base");
   var TodoList = require("todoList");
-  var doT = require("doT");
-  var Todos = new TodoList;
   var TodoView = require("TodoView");
-  var item = "{{? it.done}}<a id='clear-completed'>Clear {{= it.done}} completed {{? it.done == 1}}item{{??}}items{{?}}</a>{{?}}<div class='todo-count'><b>{{= it.remaining}}</b> {{? it.remaining == 1}}item{{??}}items{{?}} left</div>";
-  var AppView = Backbone.View.extend({
-    el: $("#todoapp"),
-    //statsTemplate: _.template($('#stats-template').html()),
-
-    statsTemplate: doT.template(item),
+  var item = require("../tpl/stats");
+  var Todos = new TodoList;
+  var AppView = Base.View.extend({
+    el: $("#todoapp"),   
     events: {
       "keypress #new-todo":  "createOnEnter",
       "click #clear-completed": "clearCompleted",
       "click #toggle-all": "toggleAllComplete"
     },
     initialize: function() {
-
+      this.statsTemplate = this.doT.template(item),
       this.input = this.$("#new-todo");
       this.allCheckbox = this.$("#toggle-all")[0];
 

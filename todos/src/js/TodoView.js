@@ -1,11 +1,9 @@
-define(["require", "backbone", "localStorage", "todo"], function(require) {
-  var Backbone = require("backbone");
-  require("localStorage");
+define(["require", "Base", "todo", "../tpl/item"], function(require) {
+  var Base = require("Base");
   var Todo = require("todo");
-  var TodoView = Backbone.View.extend({
-    tagName:  "li",
-    template: _.template($('#item-template').html()),
-    
+  var item = require("../tpl/item");
+  var TodoView = Base.View.extend({
+    tagName:  "li",    
     events: {
       "click .toggle"   : "toggleDone",
       "dblclick .view"  : "edit",
@@ -14,7 +12,8 @@ define(["require", "backbone", "localStorage", "todo"], function(require) {
       "blur .edit"      : "close"
     },
 
-    initialize: function() {
+    initialize: function() {   
+      this.template = this.doT.template(item),
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.remove);
     },

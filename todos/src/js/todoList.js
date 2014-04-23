@@ -1,10 +1,9 @@
-define(["require", "backbone", "localStorage", "todo"], function() {
-  var Backbone = require("backbone");
-  //require("localStorage");
+define(["require", "backbone", "localStorage", "todo"], function(require) {
+  var Base = require("Base");
   var Todo = require("todo");  
-  var TodoList = Backbone.Collection.extend({
+  var TodoList = Base.Collection.extend({
     model: Todo,
-    localStorage: new Backbone.LocalStorage("todos-backbone"),
+    localStorage: new Base.LocalStorage("todos-backbone"),
     done: function() {
       return this.where({
         done: true
