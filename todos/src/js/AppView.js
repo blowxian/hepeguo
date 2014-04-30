@@ -1,8 +1,9 @@
-define(["require", "todoList", "TodoView", "../tpl/stats"], function(require) {
+define(["require", "todoList", "TodoView", "../tpl/stats", "iScroll"], function(require) {
   var Base = require("Base");
   var TodoList = require("todoList");
   var TodoView = require("TodoView");
   var item = require("../tpl/stats");
+  var iScroll = require("iScroll");
   var Todos = new TodoList;
   var AppView = Base.View.extend({
     el: $("#todoapp"),   
@@ -22,6 +23,7 @@ define(["require", "todoList", "TodoView", "../tpl/stats"], function(require) {
 
       this.footer = this.$('footer');
       this.main = $('#main');
+      this.scroller = new IScroll("#wrapper", {mouseWheel: true});
 
       Todos.fetch();
     },
@@ -37,7 +39,8 @@ define(["require", "todoList", "TodoView", "../tpl/stats"], function(require) {
         this.main.hide();
         this.footer.hide();
       }
-
+      this.scroller.refresh();
+      console.log(this.scroller);
       this.allCheckbox.checked = !remaining;
     },
     addOne: function(todo) {

@@ -22,7 +22,8 @@
     "json2": lib + "json2",
     "localStorage": lib + "backbone.localStorage",
     "text": lib + "text",
-    "Base": lib + "Base"
+    "Base": lib + "Base",
+    "iScroll": lib + "iscroll"
   };
   /**
    * Configure requirejs.
