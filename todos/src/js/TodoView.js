@@ -1,4 +1,4 @@
-define(["require", "Base", "todo", "../tpl/item"], function(require) {
+define(function(require) {
   var Base = require("Base");
   var Todo = require("todo");
   var item = require("../tpl/item");

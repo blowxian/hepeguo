@@ -1,6 +1,6 @@
-define(["require", "backbone", "localStorage", "todo"], function(require) {
+define(function(require, exports, module) {
   var Base = require("Base");
-  var Todo = require("todo");  
+  var Todo = require("todo");
   var TodoList = Base.Collection.extend({
     model: Todo,
     localStorage: new Base.LocalStorage("todos-backbone"),

@@ -1,4 +1,4 @@
-define(["require", "todoList", "TodoView", "../tpl/stats", "iScroll"], function(require) {
+define(function(require, exports, module) {
   var Base = require("Base");
   var TodoList = require("todoList");
   var TodoView = require("TodoView");
@@ -40,7 +40,6 @@ define(["require", "todoList", "TodoView", "../tpl/stats", "iScroll"], function(
         this.footer.hide();
       }
       this.scroller.refresh();
-      console.log(this.scroller);
       this.allCheckbox.checked = !remaining;
     },
     addOne: function(todo) {
@@ -71,4 +70,4 @@ define(["require", "todoList", "TodoView", "../tpl/stats", "iScroll"], function(
 
   });
   return AppView;
-})
+});

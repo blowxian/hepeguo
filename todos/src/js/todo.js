@@ -1,4 +1,4 @@
-define(["require", "todoList"], function(require) {
+define(function(require) {
   var Base = require("Base");
   //var TodoList = require("todoList");
   //var Todos = new TodoList;

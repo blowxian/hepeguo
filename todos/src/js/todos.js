@@ -9,7 +9,11 @@
     },
     "underscore": {
       exports: "_"
-    }      
+    },
+    "Base": {
+      deps: ["backbone", "localStorage"],
+      exports: "Base"
+    }    
   };
   /**
    * Paths of Javascript Library
@@ -28,7 +32,7 @@
   /**
    * Configure requirejs.
    */
-  require.config({
+  requirejs.config({
     shim: shim,
     paths: paths
   });
