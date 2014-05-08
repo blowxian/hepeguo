@@ -6,7 +6,7 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family:"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: lighter;
     color: #999999;
 }
@@ -26,35 +26,40 @@ html, body {
 #todoapp input[type="checkbox"] {
     height: 20px;
     width: 20px;
+    margin-right: 10px;
 }
- #main {
+#main {
     display: none;
-    height: calc(100% - 24px);
-    overflow: hidden;
 }
- #wrapper {
-    position: relative;
+#wrapper {
+    position: absolute;
     width: 100%;
-    height: calc(100% - 24px);
+    z-index: 1;
+    top: 85px;
+    left: 0;
+    bottom: 38px;
+    padding-left: 12px;
     overflow: hidden;
 }
 #todo-list {
     position: absolute;
-    margin: 10px 0;
-    width: 100%;
+    z-index: 1;
+    width: calc(100% - 12px);
     list-style: none;
+    min-height: 101%;
 }
 #todo-list li {
     position: relative;
-    height: 40px;
+    min-height: 40px;
     font-size: 24px;
     border-bottom: 1px solid #cccccc;
 }
 #todo-list li input {
-	border: 0;
-	height: 39px;
-	width: 100%;
-	font-size: 24px;
+    position: absolute;
+    border: 0;
+    height: 39px;
+    width: 100%;
+    font-size: 24px;
 }
 #todo-list li:last-child {
     /*border-bottom: none;*/
@@ -97,6 +102,12 @@ html, body {
     display: none;
 }
 #todo-list li .view label {
+    position: relative;
+    width: calc(100% - 60px);
+    display: inline-block;
+    top: 5px;
+    margin-bottom: 10px;
+    left: 30px;
     word-break: break-word;
 }
 #todo-list li .edit {
@@ -111,7 +122,6 @@ html, body {
     color: #555555;
     background: #f4fce8;
     border-top: 1px solid #ededed;
-    /*width: calc(100% - 24px);*/
     width: 100%;
     text-align: center;
     line-height: 37px;
@@ -162,8 +172,8 @@ my css
     margin-right: 10px;
 }
 .view {
-	height: 100%;
+    height: 100%;
 }
 .view input {
-	margin-top: 10px;
+    margin-top: 10px;
 }
