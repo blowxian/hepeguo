@@ -1,0 +1,197 @@
+@charset "utf-8";
+
+/*
+*@name : button
+ *@description :
+*@author : tianyi.jiangty
+*@require : core
+ *@version : 1.0
+*@modifyTime :2014.4.14
+*/
+
+
+
+// Button variables and mixins scss
+// -----------------------------------------------------
+@import "_variables.scss";
+@import "_mixins.scss";
+
+	
+	
+/*UI_Button_Primary_small     UI_Button_Primary_large*/	
+/*UI_Button_Normal_small     UI_Button_Normal_large*/	
+	
+%small-btn{
+	padding-left: $button-padding-left;
+	padding-right: $button-padding-right;
+	font-size: $button-small-fSize;
+	line-height:$button-small-fSize;
+	min-width:60px;
+	padding-top:($button-small-height - $button-small-fSize) / 2;
+	padding-bottom:($button-small-height - $button-small-fSize) / 2;
+ }
+%normal-btn{
+	font-size: $button-normal-fSize;
+	line-height:$button-normal-fSize;
+	padding-top:($button-normal-height - $button-normal-fSize) / 2;
+	padding-bottom:($button-normal-height - $button-normal-fSize) / 2;
+	width: 100%;
+ }
+  
+/*button*/
+/*variable padding,color,background*/
+.btn{
+	box-sizing:border-box;
+	
+	position: relative;
+	display: inline-block;
+	
+	font-weight: normal;
+	
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	
+	cursor: pointer;
+	background-image: none;
+	
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	
+	border-radius:$button-radius;
+	
+	margin-top: $button-margin-top;
+	margin-bottom: $button-margin-bottom;
+	
+	border-width: 1px;
+	border-style: solid;
+	
+	
+	&.btn-primary{
+	    @include button-style($button-primary-bgColor, $button-primary-bdColor, $button-primary-active-bgColor, $button-primary-color);
+	}
+	&.btn-normal{
+		
+	   	@include button-style($button-normal-bgColor, $button-normal-bdColor, $button-normal-active-bgColor, $button-normal-color);
+	}
+	&.btn-small{
+		@extend %small-btn;
+
+	}
+	&.btn-large{
+		@extend %normal-btn;
+		
+	}
+	&.btn-warn{
+	    @include button-style($button-warn-bgColor, $button-primary-bdColor, $button-warn-active-bgColor, $button-primary-color);
+	}
+	  .btn-icon {
+		vertical-align: top;
+	  }
+
+	  .btn-icon:before,
+	  &.btn-icon:before,
+	  &.btn-icon-left:before,
+	  &.btn-icon-right:before {
+		display: inline-block;
+		vertical-align: inherit;
+	  }
+	  &.btn-icon-left:before {
+		float: left;
+		padding-right: 8px;
+		padding-left: 0;
+	  }
+	  &.btn-icon-right:before {
+		float: right;
+		padding-right: 0;
+		padding-left: 8px;
+	  }
+}
+
+
+
+.btn-block{
+	display: block;
+	width: 100%;
+	clear:both
+	
+	  &:after { 
+    clear: both;
+  }
+}
+.btn[disabled]{
+ @include button-style($button-disable-bgColor, $button-disable-bdColor, $button-disable-bgColor, $button-disable-color);
+ 
+   cursor: default !important;
+  pointer-events: none;
+}
+	
+.icon-flower:before{
+content:'✿'
+}	
+	
+/*	
+.button {
+  // set the color defaults
+  @include button-style($button-default-bg, $button-default-border, $button-default-active-bg, $button-default-active-border, $button-default-text);
+
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 1px $button-padding 0 $button-padding;
+
+  min-width: ($button-padding * 3) + $button-font-size;
+  min-height: $button-height + 5px;
+
+  border-width: $button-border-width;
+  border-style: solid;
+  border-radius: $button-border-radius;
+
+  vertical-align: top;
+  text-align: center;
+
+  text-overflow: ellipsis;
+  font-size: $button-font-size;
+  line-height: $button-height - $button-border-width + 1px;
+
+  cursor: pointer;
+
+  &:after {
+    // used to create a larger button "hit" area
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    bottom: -6px;
+    left: -8px;
+    content: ' ';
+  }
+
+  .icon {
+    vertical-align: top;
+  }
+
+  .icon:before,
+  &.icon:before,
+  &.icon-left:before,
+  &.icon-right:before {
+    display: inline-block;
+    padding: 0 0 $button-border-width 0;
+    vertical-align: inherit;
+    font-size: $button-icon-size;
+    line-height: $button-height - $button-border-width;
+  }
+  &.icon-left:before {
+    float: left;
+    padding-right: .2em;
+    padding-left: 0;
+  }
+  &.icon-right:before {
+    float: right;
+    padding-right: 0;
+    padding-left: .2em;
+  }
+}
+*/
