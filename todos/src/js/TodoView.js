@@ -9,7 +9,8 @@ define(function(require) {
       "dblclick .view"  : "edit",
       "click a.destroy" : "clear",
       "keypress .edit"  : "updateOnEnter",
-      "blur .edit"      : "close"
+      "blur .edit"      : "close",
+      "tap .view": "SMS"
     },
 
     initialize: function() {   
@@ -50,6 +51,11 @@ define(function(require) {
 
     clear: function() {
       this.model.destroy();
+    },
+
+    SMS: function(event) {
+      // alert(event.target);
+      $("#new-todo").blur();
     }
 
   });

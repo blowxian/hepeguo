@@ -24,7 +24,9 @@ define(function(require, exports, module) {
             this.footer = this.$('footer');
             this.main = $('#main');
             this.scroller = new IScroll("#wrapper", {
-                mouseWheel: true
+                mouseWheel: true,
+                click: true,
+                tap: true
             });
 
             Todos.fetch();
@@ -65,6 +67,7 @@ define(function(require, exports, module) {
                 title: this.input.val()
             });
             this.input.val('');
+            this.input.blur();
         },
 
         clearCompleted: function() {
