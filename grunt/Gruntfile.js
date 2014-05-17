@@ -1,14 +1,21 @@
+'use strict'
 module.exports = function(grunt) {
 	grunt.initConfig({
 		sass: {
 			dist: {
 				files: {
-					"main.css": "main.scss"
+					"main/main.css": "main/main.scss"
 				}
 			}
-		}		
+		},
+		watch: {
+			css: {
+				files: "**/*.scss",
+				tasks: ["sass"]
+			}
+		}
 	});
 	grunt.loadNpmTasks('grunt-sass');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.registerTask('default', ['sass']);
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.registerTask('default', ['watch']);
 };

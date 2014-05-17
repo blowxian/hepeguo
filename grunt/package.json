@@ -1,0 +1,16 @@
+{
+	"name": "shippingma",
+	"version": "1.0.0",
+	"description": "solution",
+	"dependencies": {
+		"grunt": "~0.4.1",
+		"grunt-sass": ">=0.12.1",
+		"grunt-contrib-watch": "~0.4.4"
+	},
+	"repository": {
+
+	},
+	"readme": "A",
+	"readmeFilename": "README.MD",
+	"homepage": "https://shippingma.alibaba.com/mobile.buyer/home.htm"
+}
