@@ -2,7 +2,7 @@ define(function(require, exports, module) {
     var Base = require("Base");
     var TodoList = require("todoList");
     var TodoView = require("TodoView");
-    var item = require("../tpl/stats");
+    var item = require("text!../tpl/stats.tpl");
     var iScroll = require("iScroll");
     var Todos = new TodoList;
     var AppView = Base.View.extend({

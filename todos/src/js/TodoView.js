@@ -1,19 +1,19 @@
 define(function(require) {
   var Base = require("Base");
   var Todo = require("todo");
-  var item = require("../tpl/item");
+  var item = require("text!../tpl/item.tpl");
   var TodoView = Base.View.extend({
-    tagName:  "li",    
+    tagName: "li",
     events: {
-      "click .toggle"   : "toggleDone",
-      "dblclick .view"  : "edit",
-      "click a.destroy" : "clear",
-      "keypress .edit"  : "updateOnEnter",
-      "blur .edit"      : "close",
-      "tap .view": "SMS"
+      "touchend .toggle": "toggleDone",
+      "dblclick .view": "edit",
+      "click a.destroy": "clear",
+      "keypress .edit": "updateOnEnter",
+      "blur .edit": "close",
+      "touchend .view": "toggleDone"
     },
 
-    initialize: function() {   
+    initialize: function() {
       this.template = this.doT.template(item),
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.remove);
@@ -28,6 +28,9 @@ define(function(require) {
 
     toggleDone: function() {
       this.model.toggle();
+      console.log("toggleDone");
+      //let input auto blur
+      $("#new-todo").blur();
     },
 
     edit: function() {
@@ -40,7 +43,9 @@ define(function(require) {
       if (!value) {
         this.clear();
       } else {
-        this.model.save({title: value});
+        this.model.save({
+          title: value
+        });
         this.$el.removeClass("editing");
       }
     },
@@ -51,11 +56,6 @@ define(function(require) {
 
     clear: function() {
       this.model.destroy();
-    },
-
-    SMS: function(event) {
-      // alert(event.target);
-      $("#new-todo").blur();
     }
 
   });
