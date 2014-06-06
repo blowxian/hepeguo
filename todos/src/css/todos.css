@@ -21,6 +21,8 @@ html, body {
     border: 0;
     outline: none;
     margin-bottom: 10px;
+    border-radius: 0;
+    /*background: red;*/
     border-bottom: 1px solid #999999;
 }
 #todoapp input[type="checkbox"] {
