@@ -1,0 +1,66 @@
+<html manifest="title.manifest">
+
+<head>
+    <title>android click event test</title>
+    <meta name="viewport" content="width=device-width initial-scale=1 minimum-scale=1 maximum-scale=1 user-scalable=no minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png" />
+    <style rel="stylesheet/css">
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+    .title {
+        height: 40px;
+        width: 100%;
+        border: 1px solid #7c7c7c;
+    }
+    .showing {
+        position: absolute;
+        top: 0;
+    }
+    body {
+        overflow: hidden;
+    }
+    ul {
+        /*border: 0;*/
+        min-height: 101%;
+    }
+    #wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .text {
+        height: 118px;
+    }
+    </style>
+    <script type="text/javascript" src="iscroll-probe.js"></script>
+    <script type="text/javascript" src="title.js"></script>
+</head>
+
+<body onload="onload()">
+    <!-- <div onclick="test(event)" ontouchstart="test(event)" ontouchend="test(event)" onmousedown="test(event)" onmouseup="test(event)" ontap="test()"></div> -->
+    <div id="wrapper">
+        <ul>
+            <!-- <div id="title" ontouchend="test(event)"></div> -->
+            <div class="title showing">this is test html 2</div>
+            <p class="text"></p>
+            <div class="title">2</div>
+            <p class="text"></p>
+            <div class="title">3</div>
+            <p class="text"></p>
+            <div class="title">4</div>
+            <p class="text"></p>
+            <div class="title">5</div>
+            <p class="text"></p>
+            <div class="title">6</div>
+            <p class="text"></p>
+        </ul>
+    </div>
+
+</body>
+
+</html>
