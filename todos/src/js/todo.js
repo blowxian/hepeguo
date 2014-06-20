@@ -1,10 +1,8 @@
-define(["require", "backbone", "localStorage", "todoList"], function(require) {
-  require("backbone");
-
-  require("localStorage");
+define(function(require) {
+  var Base = require("Base");
   //var TodoList = require("todoList");
   //var Todos = new TodoList;
-  var Todo = Backbone.Model.extend({
+  var Todo = Base.Model.extend({
 
     // Default attributes for the todo item.
     defaults: function() {

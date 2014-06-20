@@ -1,76 +1,89 @@
-define(["require", "backbone", "localStorage", "todoList", "TodoView"], function(require) {
-  var Backbone = require("backbone");
-  require("localStorage");
-  var TodoList = require("todoList");
-  var doT = require("doT");
-  var Todos = new TodoList;
-  var TodoView = require("TodoView");
-  var item = "{{? it.done}}<a id='clear-completed'>Clear {{= it.done}} completed {{? it.done == 1}}item{{??}}items{{?}}</a>{{?}}<div class='todo-count'><b>{{= it.remaining}}</b> {{? it.remaining == 1}}item{{??}}items{{?}} left</div>";
-  var AppView = Backbone.View.extend({
-    el: $("#todoapp"),
-    //statsTemplate: _.template($('#stats-template').html()),
+define(function(require, exports, module) {
+    var Base = require("Base");
+    var TodoList = require("todoList");
+    var TodoView = require("TodoView");
+    var item = require("text!../tpl/stats.tpl");
+    var iScroll = require("iScroll");
+    var Todos = new TodoList;
+    var AppView = Base.View.extend({
+        el: $("#todoapp"),
+        events: {
+            "keypress #new-todo": "createOnEnter",
+            "click #clear-completed": "clearCompleted",
+            "click #toggle-all": "toggleAllComplete"
+        },
+        initialize: function() {
+            this.statsTemplate = this.doT.template(item),
+            this.input = this.$("#new-todo");
+            this.allCheckbox = this.$("#toggle-all")[0];
 
-    statsTemplate: doT.template(item),
-    events: {
-      "keypress #new-todo":  "createOnEnter",
-      "click #clear-completed": "clearCompleted",
-      "click #toggle-all": "toggleAllComplete"
-    },
-    initialize: function() {
+            this.listenTo(Todos, 'add', this.addOne);
+            this.listenTo(Todos, 'reset', this.addAll);
+            this.listenTo(Todos, 'all', this.render);
 
-      this.input = this.$("#new-todo");
-      this.allCheckbox = this.$("#toggle-all")[0];
+            this.footer = this.$('footer');
+            this.main = $('#main');
+            this.scroller = new IScroll("#wrapper", {
+                mouseWheel: true,
+                click: true,
+                tap: true
+            });
 
-      this.listenTo(Todos, 'add', this.addOne);
-      this.listenTo(Todos, 'reset', this.addAll);
-      this.listenTo(Todos, 'all', this.render);
+            Todos.fetch();
+        },
+        render: function() {
+            var done = Todos.done().length;
+            var remaining = Todos.remaining().length;
 
-      this.footer = this.$('footer');
-      this.main = $('#main');
+            if (Todos.length) {
+                this.main.show();
+                this.footer.show();
+                this.footer.html(this.statsTemplate({
+                    done: done,
+                    remaining: remaining
+                }));
+            } else {
+                this.main.hide();
+                this.footer.hide();
+            }
+            this.scroller.refresh();
+            this.allCheckbox.checked = !remaining;
+        },
+        addOne: function(todo) {
+            var view = new TodoView({
+                model: todo
+            });
+            this.$("#todo-list").append(view.render().el);
+        },
+        addAll: function() {
+            Todos.each(this.addOne, this);
+        },
 
-      Todos.fetch();
-    },
-    render: function() {
-      var done = Todos.done().length;
-      var remaining = Todos.remaining().length;
+        createOnEnter: function(e) {
+            if (e.keyCode != 13) return;
+            if (!this.input.val()) return;
 
-      if (Todos.length) {
-        this.main.show();
-        this.footer.show();
-        this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
-      } else {
-        this.main.hide();
-        this.footer.hide();
-      }
+            Todos.create({
+                title: this.input.val()
+            });
+            this.input.val('');
+            this.input.blur();
+        },
 
-      this.allCheckbox.checked = !remaining;
-    },
-    addOne: function(todo) {
-      var view = new TodoView({model: todo});
-      this.$("#todo-list").append(view.render().el);
-    },
-    addAll: function() {
-      Todos.each(this.addOne, this);
-    },
+        clearCompleted: function() {
+            _.invoke(Todos.done(), 'destroy');
+            return false;
+        },
 
-    createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      if (!this.input.val()) return;
+        toggleAllComplete: function() {
+            var done = this.allCheckbox.checked;
+            Todos.each(function(todo) {
+                todo.save({
+                    'done': done
+                });
+            });
+        }
 
-      Todos.create({title: this.input.val()});
-      this.input.val('');
-    },
-
-    clearCompleted: function() {
-      _.invoke(Todos.done(), 'destroy');
-      return false;
-    },
-
-    toggleAllComplete: function () {
-      var done = this.allCheckbox.checked;
-      Todos.each(function (todo) { todo.save({'done': done}); });
-    }
-
-  });
-  return AppView;
-})
+    });
+    return AppView;
+});

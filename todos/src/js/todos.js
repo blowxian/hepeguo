@@ -9,7 +9,11 @@
     },
     "underscore": {
       exports: "_"
-    }
+    },
+    "Base": {
+      deps: ["backbone", "localStorage"],
+      exports: "Base"
+    }    
   };
   /**
    * Paths of Javascript Library
@@ -21,12 +25,14 @@
     "doT": lib + "doT",
     "json2": lib + "json2",
     "localStorage": lib + "backbone.localStorage",
-    "text": lib + "text"
+    "text": lib + "text",
+    "Base": lib + "Base",
+    "iScroll": lib + "iscroll"
   };
   /**
    * Configure requirejs.
    */
-  require.config({
+  requirejs.config({
     shim: shim,
     paths: paths
   });
@@ -36,16 +42,4 @@
 define(function(require, exports, module) {
   var AppView = require("AppView");
   var App = new AppView;
-  //var tpl = require("text!../../tpl/item.tpl");
-  //console.log(tpl);
-
-  /* add doT
-
-  var doT = require("doT");
-  console.log(doT);
-  var nameTpl = doT.template("<h1>{{=it.name}}</h1>");
-  var guo = nameTpl({name: "guozhenyong"});
-  console.log(guo);
-  $("#main").html(guo);
-  */
 });

@@ -1,20 +1,20 @@
-define(["require", "backbone", "localStorage", "todo"], function(require) {
-  var Backbone = require("backbone");
-  require("localStorage");
+define(function(require) {
+  var Base = require("Base");
   var Todo = require("todo");
-  var TodoView = Backbone.View.extend({
-    tagName:  "li",
-    template: _.template($('#item-template').html()),
-    
+  var item = require("text!../tpl/item.tpl");
+  var TodoView = Base.View.extend({
+    tagName: "li",
     events: {
-      "click .toggle"   : "toggleDone",
-      "dblclick .view"  : "edit",
-      "click a.destroy" : "clear",
-      "keypress .edit"  : "updateOnEnter",
-      "blur .edit"      : "close"
+      "touchend .toggle": "toggleDone",
+      "dblclick .view": "edit",
+      "click a.destroy": "clear",
+      "keypress .edit": "updateOnEnter",
+      "blur .edit": "close",
+      "touchend .view": "toggleDone"
     },
 
     initialize: function() {
+      this.template = this.doT.template(item),
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.remove);
     },
@@ -28,6 +28,9 @@ define(["require", "backbone", "localStorage", "todo"], function(require) {
 
     toggleDone: function() {
       this.model.toggle();
+      console.log("toggleDone");
+      //let input auto blur
+      $("#new-todo").blur();
     },
 
     edit: function() {
@@ -40,7 +43,9 @@ define(["require", "backbone", "localStorage", "todo"], function(require) {
       if (!value) {
         this.clear();
       } else {
-        this.model.save({title: value});
+        this.model.save({
+          title: value
+        });
         this.$el.removeClass("editing");
       }
     },
