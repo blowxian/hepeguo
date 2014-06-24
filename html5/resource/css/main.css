@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-align: center;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+body {
+	padding: 12px;
+}
+input {
+	height: 30px;
+	width: 90px;
+	line-height: 30px;
+	margin-bottom: 12px;
+	border: 1px solid #cccccc;
+	border-radius: 2px;
+}
+input[type="text"] {
+	width: 100%;
+}
+canvas {
+	height: 296px;
+	width: 296px;
+}
+video {
+	display: none;
+}
