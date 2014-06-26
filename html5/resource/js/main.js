@@ -1,7 +1,7 @@
 ;
 (function(win, doc) {
 	var $ = function(id) {
-		return doc.getElementById(id) || doc.getElementsByClassName(id);
+		return doc.getElementById(id) || doc.getElementsByClassName(id) ||doc.getElementsByTagName(id);
 	}
 
 	var $text = $("text");
@@ -9,6 +9,7 @@
 	var $audio = $("audio");
 	var $carmer = $("carmer");
 	var $video = $("video");
+	var $recognize = $("recognize");
 
 //发音
 	$speak.onclick = function() {
@@ -49,5 +50,10 @@
 //录音
 	$audio.onclick = function() {
 
+	}
+
+//语言识别
+	$recognize.onclick = function() {
+		console.log("recognize!!!!!!!!!!!!!!!!!!!!!");
 	}
 })(window, document);

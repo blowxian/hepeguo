@@ -26,3 +26,15 @@ canvas {
 video {
 	display: none;
 }
+textarea {
+	height: 50px;
+	/*width: 296px;*/
+	width: 100%;
+	margin-bottom: 12px;
+}
+
+@media (light-level: dim) {
+	body {
+		background: red;
+	}
+}
