@@ -1,17 +1,18 @@
 ;
 (function(win, doc) {
 	var $ = function(id) {
-		return doc.getElementById(id) || doc.getElementsByClassName(id) ||doc.getElementsByTagName(id);
+		return doc.getElementById(id) || doc.getElementsByClassName(id) || doc.getElementsByTagName(id);
 	}
 
 	var $text = $("text");
 	var $speak = $("speak");
 	var $audio = $("audio");
-	var $carmer = $("carmer");
+	var $camera = $("camera");
 	var $video = $("video");
+	var $videoSrc = $("videoSrc");
 	var $recognize = $("recognize");
 
-//发音
+	//发音
 	$speak.onclick = function() {
 		console.log("clicked speak!!!!!!!!!!!!!!!!");
 		var msg = new SpeechSynthesisUtterance();
@@ -42,17 +43,53 @@
 		});
 	};
 
-//视频
-	$carmer.onclick = function() {
-		console.log("clicked carmer!!!!!!!!!!!!!!!!");
+	//视频
+	var videoStream;
+	$camera.onclick = function() {
+		console.log("clicked camera!!!!!!!!!!!!!!!!");
+		if (videoStream) {
+			videoStream.stop();
+			videoStream = undefined;
+			return;
+		}
+		var ctx = $video.getContext("2d");
+		navigator.getUserMedia_ = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+		window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
+		if (navigator.getUserMedia_) {
+			navigator.getUserMedia_({
+				video: {
+					mandatory: {
+						minWidth: 1280,
+						minHeight: 720,
+						minFrameRate: 30
+					},
+					optional: [{minFrameRate: 60}]
+				},
+				audio: true
+			}, function(stream) {
+				$videoSrc.src = window.URL.createObjectURL(stream) || stream;
+				videoStream = stream;
+			}, function() {
+				return;
+			});
+		}
+		$videoSrc.addEventListener('play', function() {
+			(function loop() {
+				ctx.drawImage($videoSrc, 0, 0, $video.width, $video.height);
+				setTimeout(loop, 1000 / 30);
+			})();
+		}, 0);
+		$videoSrc.addEventListener('ended', function() {
+			ctx.clearRect(0, 0, 1160, 678);
+		});
 	}
 
-//录音
+	//录音
 	$audio.onclick = function() {
 
 	}
 
-//语言识别
+	//语言识别
 	$recognize.onclick = function() {
 		console.log("recognize!!!!!!!!!!!!!!!!!!!!!");
 	}
