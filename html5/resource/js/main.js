@@ -165,7 +165,7 @@
 			['日本語', ['ja-JP']],
 			['Lingua latīna', ['la']]
 		];
-		//初始化speechRecognition
+	//初始化speechRecognition
 	if ("webkitSpeechRecognition" in win) {
 		var recognition = new webkitSpeechRecognition();
 		recognition.continuous = true;
@@ -179,7 +179,7 @@
 			for (var i = event.resultIndex; i < event.results.length; ++i) {
 				if (event.results[i].isFinal) {
 					final_transcript += event.results[i][0].transcript;
-					if(event.results[i][0].transcript == "清空" || event.results[i][0].transcript == "清除") {
+					if (event.results[i][0].transcript == "清空" || event.results[i][0].transcript == "清除") {
 						final_transcript = " ";
 					}
 				} else {
